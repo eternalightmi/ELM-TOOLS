@@ -1,108 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE
+html>
+<html
+lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ELM Tools">
-<title>ELM Tools | Eternal Light Michigan</title>
+<meta
+charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+<title>ELM
+ Tools</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#0d0f17;--card:#1a1d2e;--card2:#20243a;
-  --border:#2c3058;--accent:#f0a020;--text:#e2e4f0;
-  --muted:#7c80a0;--dimmer:#555878;--red:#c0392b;
-  --success:#3ecf8e;--radius:14px;
-}
-html,body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display',BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
-
-/* HEADER */
-#header{padding:32px 24px 0;text-align:center}
-#header img{height:64px;width:auto;margin-bottom:16px}
-.brand-name{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.3px}
-.brand-tagline{font-size:13px;color:var(--muted);margin-top:4px}
-.brand-divider{width:40px;height:3px;background:var(--red);border-radius:2px;margin:14px auto 0}
-
-/* GRID */
-#grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:24px 16px 32px;max-width:700px;margin:0 auto}
-
-/* TOOL CARDS */
-.tool-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;cursor:pointer;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:all .15s;position:relative;overflow:hidden}
-.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-color,var(--accent))}
-.tool-card:active{transform:scale(.97);opacity:.9}
-.tool-card.large{grid-column:span 2}
-
-.tc-icon{font-size:28px;line-height:1}
-.tc-name{font-size:15px;font-weight:700;color:var(--text)}
-.tc-desc{font-size:12px;color:var(--muted);line-height:1.5}
-.tc-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px;background:rgba(240,160,32,.12);color:var(--accent);margin-top:2px;width:fit-content}
-.tc-badge.green{background:rgba(62,207,142,.12);color:var(--success)}
-.tc-badge.blue{background:rgba(111,168,220,.12);color:#6fa8dc}
-
-/* FOOTER */
-#footer{text-align:center;padding:0 16px 40px;color:var(--dimmer);font-size:12px;max-width:700px;margin:0 auto}
-#footer .tip{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;font-size:12px;color:var(--muted);line-height:1.6;text-align:left}
-#footer .tip strong{color:var(--text)}
-.add-home-btn{display:inline-flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:8px 16px;font-size:12px;cursor:pointer;margin-bottom:16px;text-decoration:none}
-
-@media(max-width:400px){
-  #grid{grid-template-columns:1fr}
-  .tool-card.large{grid-column:span 1}
-}
+body{margin:0;padding:0;background:#0d0f17;color:#e2e4f0;font-family:-apple-system,sans-serif;min-height:100vh}
+.header{background:#1a1d2e;border-bottom:3px
+ solid #c0392b;padding:20px;text-align:center}
+.header 
+h1{font-size:22px;font-weight:800;margin:0}
+.header 
+p{font-size:13px;color:#7c80a0;margin:6px
+0 
+0} .grid{display:grid;grid-template-columns:1fr
+1fr;gap:14px;padding:20px;max-width:700px;margin:0
+ auto} .card{background:#1a1d2e;border:1px
+ solid #2c3058;border-radius:12px;padding:20px;text-decoration:none;color:#e2e4f0;display:block}
+.card:hover{border-color:#3a3f68}
+.card.full{grid-column:span
+2} 
+.card-icon{font-size:28px;margin-bottom:10px}
+.card-name{font-size:15px;font-weight:700;margin-bottom:6px}
+.card-desc{font-size:12px;color:#7c80a0;line-height:1.5}
+.tip{background:#1a1d2e;border:1px solid
+#2c3058;border-radius:12px;padding:14px;margin:0
+20px 
+20px;font-size:12px;color:#7c80a0;max-width:700px;margin-left:auto;margin-right:auto}
+.tip 
+strong{color:#e2e4f0}
 </style>
 </head>
 <body>
-
-<div id="header">
-  <img id="logo" alt="Eternal Light Michigan" />
-  <div class="brand-name">Eternal Light Michigan</div>
-  <div class="brand-tagline">Landscape & Holiday Lighting &nbsp;·&nbsp; Riverview, MI</div>
-  <div class="brand-divider"></div>
+<div
+class="header">
+<h1>Eternal
+ Light Michigan</h1>
+<p>Landscape
+&amp; Holiday Lighting
+&nbsp;&middot;&nbsp;
+ Riverview, MI</p>
 </div>
-
-<div id="grid">
-
-  <a class="tool-card large" href="in-lite_quote_builder_14.html" style="--card-color:#f0a020">
-    <div class="tc-icon">📋</div>
-    <div class="tc-name">Quote Builder</div>
-    <div class="tc-desc">Build in-lite landscape lighting quotes with live pricing, tiered labor, market multiplier, and Jobber export.</div>
-    <div class="tc-badge">Fixtures &nbsp;·&nbsp; Labor add-ons &nbsp;·&nbsp; Jobber copy</div>
-  </a>
-
-  <a class="tool-card large" href="ELM_System_Planner.html" style="--card-color:#3ecf8e">
-    <div class="tc-icon">⚡</div>
-    <div class="tc-name">System Planner &amp; Job Record</div>
-    <div class="tc-desc">Plan VA loads, balance zones, map cable branches, check CC-2 connectors, then document the install and copy to Jobber.</div>
-    <div class="tc-badge green">Planning &nbsp;·&nbsp; Documentation &nbsp;·&nbsp; Cloud sync</div>
-  </a>
-
-  <a class="tool-card" href="ELM_Maintenance_Tracker_3.html" style="--card-color:#6fa8dc">
-    <div class="tc-icon">🔄</div>
-    <div class="tc-name">Maintenance Tracker</div>
-    <div class="tc-desc">Track enrolled customers, autopay status, card failures, and lifetime warranty streaks.</div>
-    <div class="tc-badge blue">Customers &nbsp;·&nbsp; Cloud sync</div>
-  </a>
-
-  <a class="tool-card" href="Field Reference Guide.html" style="--card-color:#c0392b">
-    <div class="tc-icon">📄</div>
-    <div class="tc-name">Field Reference</div>
-    <div class="tc-desc">Hub capacities, cable max run lengths, CC-2 limits, and all 212 fixture VAs. Print and keep in the truck.</div>
-    <div class="tc-badge">HUB &nbsp;·&nbsp; Cable &nbsp;·&nbsp; Fixture VA</div>
-  </a>
-
+<div
+class="grid">
+<a
+class="card full"
+href="in-lite_quote_builder_14.html">
+<div
+class="card-icon">&#128203;</div>
+<div
+class="card-name">Quote Builder</div>
+<div
+class="card-desc">Build in-lite landscape
+ lighting quotes with live pricing, tiered labor, market multiplier, and Jobber export.</div>
+</a>
+<a
+class="card full"
+href="ELM_System_Planner.html">
+<div
+class="card-icon">&#9889;</div>
+<div
+class="card-name">System Planner
+&amp; Job Record</div>
+<div
+class="card-desc">Plan VA loads, balance
+ zones, map cable branches, document the install, and copy to Jobber.</div>
+</a>
+<a
+class="card"
+href="ELM_Maintenance_Tracker_3.html">
+<div
+class="card-icon">&#128260;</div>
+<div
+class="card-name">Maintenance Tracker</div>
+<div
+class="card-desc">Track enrolled customers,
+ autopay status, card failures, and lifetime warranty streaks.</div>
+</a>
+<a
+class="card"
+href="Field Reference Guide.html">
+<div
+class="card-icon">&#128196;</div>
+<div
+class="card-name">Field Reference</div>
+<div
+class="card-desc">Hub capacities, cable
+ run limits, CC-2 rules, and all 215 fixture VAs with live search.</div>
+</a>
 </div>
-
-<div id="footer">
-  <div class="tip">
-    <strong>Adding to your Home Screen (recommended)</strong><br>
-    On iPad or iPhone: tap the <strong>Share</strong> button in Safari, then <strong>Add to Home Screen</strong>. The ELM dashboard will appear on your home screen like an app — one tap to access all your tools from any job site.
-  </div>
-  <div style="color:var(--dimmer)">Eternal Light Michigan &nbsp;·&nbsp; Celebright Gold Partner &nbsp;·&nbsp; in-lite Contractor</div>
-</div>
-
+<div
+class="tip">
+<strong>Add
+ to Home Screen</strong>
+&mdash; On iPad or iPhone, tap
+ the Share button in Safari then &ldquo;Add
+ to Home Screen&rdquo; for one-tap
+ access from any job site. </div>
 </body>
 </html>
+
 
 
 
