@@ -84,7 +84,7 @@ html,body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF P
     <div class="tc-badge blue">Customers &nbsp;·&nbsp; Cloud sync</div>
   </a>
 
-  <a class="tool-card" href="ELM_Field_Reference.html" style="--card-color:#c0392b">
+  <a class="tool-card" href="Field Reference Card.html" style="--card-color:#c0392b">
     <div class="tc-icon">📄</div>
     <div class="tc-name">Field Reference</div>
     <div class="tc-desc">Hub capacities, cable max run lengths, CC-2 limits, and all 212 fixture VAs. Print and keep in the truck.</div>
@@ -107,3 +107,4 @@ document.getElementById('logo').src = 'data:image/png;base64,' + LOGO;
 </script>
 </body>
 </html>
+
