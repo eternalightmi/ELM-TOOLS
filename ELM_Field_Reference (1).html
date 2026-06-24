@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Field Reference | Eternal Light Michigan</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f17;--card:#1a1d2e;--card2:#20243a;
+  --border:#2c3058;--border2:#3a3f68;
+  --accent:#f0a020;--text:#e2e4f0;--muted:#7c80a0;--dimmer:#555878;
+  --success:#3ecf8e;--danger:#f07070;--warn:#f0c020;--red:#c0392b;
+  --radius:10px;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+
+/* HEADER */
+#header{background:var(--card);border-bottom:3px solid var(--red);padding:14px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50}
+#header img{height:40px;width:auto}
+.hdr-title{font-size:16px;font-weight:700}
+.hdr-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.back-btn{margin-left:auto;background:transparent;border:1px solid var(--border2);color:var(--muted);border-radius:var(--radius);padding:7px 14px;font-size:12px;cursor:pointer;text-decoration:none;flex-shrink:0}
+
+/* LAYOUT */
+#app{max-width:1100px;margin:0 auto;padding:20px 16px 60px;display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+.left-col{display:flex;flex-direction:column;gap:16px}
+.right-col{display:flex;flex-direction:column;gap:16px}
+
+/* SECTIONS */
+.section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.section-hdr{background:#12152a;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.section-hdr-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text)}
+.section-hdr-icon{font-size:16px}
+.section-body{padding:14px 16px}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse}
+th{padding:8px 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border);text-align:left}
+td{padding:7px 10px;border-bottom:1px solid rgba(44,48,88,.35);font-size:13px}
+tr:last-child td{border-bottom:none}
+tr.row-alt{background:rgba(32,36,58,.6)}
+tr:hover td{background:rgba(44,48,88,.3)}
+
+.td-hub-name{font-weight:700;color:var(--accent)}
+.td-center{text-align:center}
+.td-green{color:var(--success);font-weight:700;text-align:center}
+.td-gauge{font-weight:700;color:var(--text)}
+.td-thresh{font-weight:700;color:var(--accent)}
+.td-name{color:var(--text)}
+.va-confirm{color:var(--success);font-weight:700;text-align:right}
+.va-warn{color:var(--danger);font-size:11px;font-weight:600;text-align:right}
+.hub-warn{color:var(--warn);font-weight:700}
+
+/* CATEGORY SECTIONS */
+.cat-section{margin-bottom:14px}
+.cat-section:last-child{margin-bottom:0}
+.cat-header{background:#12152a;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;border-radius:6px 6px 0 0;border:1px solid var(--border);border-bottom:none}
+.cat-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent)}
+.cat-count{font-size:11px;color:var(--dimmer)}
+.fixture-table{border:1px solid var(--border);border-radius:0 0 6px 6px;overflow:hidden}
+.fixture-table th:last-child,.fixture-table td:last-child{text-align:right;width:100px}
+
+/* SEARCH */
+#search-wrap{position:sticky;top:67px;z-index:40;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+#search{width:100%;max-width:100%;background:var(--card2);border:1.5px solid var(--border);color:var(--text);border-radius:var(--radius);padding:10px 14px;font-size:14px;outline:none}
+#search:focus{border-color:var(--accent)}
+#search-count{font-size:11px;color:var(--dimmer);margin-top:5px}
+
+/* WARN BOX */
+.warn-box{background:rgba(240,192,32,.08);border:1px solid rgba(240,192,32,.3);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:#c8960a;line-height:1.6;margin-top:0}
+.warn-box strong{color:#f0c020}
+
+/* RULE BULLETS */
+.rules{display:flex;flex-direction:column;gap:8px;padding:2px 0}
+.rule{display:flex;gap:10px;font-size:13px;line-height:1.5;color:var(--muted)}
+.rule-dot{color:var(--accent);font-size:16px;flex-shrink:0;line-height:1.4}
+.rule strong{color:var(--text)}
+
+/* MOBILE */
+@media(max-width:720px){
+  #app{grid-template-columns:1fr;padding:12px 12px 60px}
+  #search-wrap{top:63px}
+}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAABxCAYAAACQnewjAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAsgUlEQVR42u2dd5xkVZn3v+ece29VdajUcRiQHBbRBVFEWXdlAyoiGSQjQZbXdV1xRUEQECOiLJKTgMQVw6ICImtYhZlhGBwGyQxDmJw6d1VX1b3nnPePc6s6z/Sw7vsu0/fpz/lMz0zXrVu3z+88+fcIa60lkUQSmVJk8ggSSSQBSCKJJABJJJEEIIkkkgAkkUQSgCSSSAKQRBJJAJJIIglAEklk9omXPIL/D2ItWLBY9/2mRAhE/CdCJM8uAchWLMaCqG92iLf+FgMLmQAlAcjWpjSwiHhjhyMj6I09hD0bqfb0QX8/YaUCgEKAp5CpAFqzBMUCQXsbqq0dvykDAqy1iESbJADZasBhDEjB6p/8lN477yXs2YjesBFbKqHDGugIrHEWFRIQWAEohfR9ZHMLsqONoK2dtpNOoOvoI8AYhExcyAQgbxnTyZlN0/2/kJLK888z+PBDpLvnIAWIwMdLB1ghENhY08iGOSWwYCy2MgIrVjK4aBHN++6N5MgYdJu6JwMJgBKA/P/WDMZalFJYpseHjbHTuuPO9GZzyFSAiSLnn2uLwIz65NixRpn7Vkmk5+Fnc7TsuHP9BzdhzoGQkkhrlBCJpvlvSPLk3hQyLFZrhJQopSivXIGJoml/vL6XRUcRIyVog7AODKOAGLu9bQMsAouwgDZYIZCdbZu9PR1GDL/xBp5SCCmxWm8+WpZIApA/Ay6w2rjQq1KUX32VZf/yeZ475AjC9Rvc1jZmMkBih9rv6EAGAdbaBgxmvKxFBgF+Z0f9olObVUC0fj0vfOxIXvnncyi/shShFAiB1SbBSQKQ/ylwWIyOEEoSlUos//Z3ef4jH6Pv3n9HrFzB8OLFCEBPAZC6Dkm3tSObMmA0Is5vzGgJAUYjm5pIFdvjK04GSBS/9/Dip2DNSvrv+xEvHnwoy791OeHwMEJJjNYkTaQJQP78USghkJ5H33/9nhcOOYx1l12GXw1JFQtI6zHw+0fjg11Oa2OJfBbZ2oqIDGJLvyKDyrYicq3T+iAi/nUO/uEPeFaRKhRRoWH95d/hpY8eTt/v/gvpxdpkSiAnkgBkSwNUOgIpMWHIG5d+nWUnnkL08iuk2jpBSUwUItMpRp54El2toqScZO9b4TwN1dJCkM+DfhMaRGv8QgHV2upMrokmlrUoJdHVGuVFixGpFCaqgYRUWzvRK6+w7KRTeOPSr2PC0H0mHSW/4AQg/w3NoTVSeVRXLOeljx9H75VXE2SaUU1pbBQ6IBiLSPvUXn2Vkeeec/kLYycrEKNRykN1tDuneUvyfMLdi2pvR0nlTLRJSHZZ+vILz1N79TVEOnD/ZsFEEbIpjZ9uoffKq3np48dTXbECqTx3L4kkANlizRFphFIMPLGIFw87hujRBXjt7VijnaM+xoMWUkG5xMC8xxHENVZT+DAAqqMDqw3Sihl76NI6B1t1tI+71vjYl/u3oXmPY0tDSOlNALtFWI3f3k706HxePOxoBp5YhFAKEyUgSQCyRZojQnqK3ocfZtnxJyLWrUcUCogwRAISgRQ0lrCgPJ+h+Y9jpvND4j2d7u5GWAvSjrvGphYSpLWku7vHXWt8pExigOF5j+N5AVjr7nPMEgiIQkShgFy/gWUnnETvww8jPYVNzK0EIDM1q4Ty2PDTn7D8zLMItEE2p0GHIK1Dw8SFRjSliZ55mnDtWrer7UQzKw71zulGxK8TYprrjVnuZwwIiz+ne+oIlrUgBdG6ddSeWYJoSgE6fp1pvL5hr+kQ0ZQiiDTLzziLDT/5CSIxtxKAbNasMs6s2vCzn7Pin89BBWms7zmnepOoskjfI1rfw9AfF49GvqaIZHmdnVglEUYyk2CrBfeznsTr6pwyglV/r+E/PkW0biPC96ZIDNoGWASA1uB7eEGaFZ85h43/8XNnbpkEJAlApkYHUkr6HnmEVZ/+DEEqACUbybfNb2aBMIbyHx5jyl0cR51SXZ2IIIW1Mw+zWmsQfopUZ+e4a02UwcceQxi92TJ6OwZY1pMEqYCVn/kXen/1K6Qc/cyJJAAZb6YgCDf0YisV8IMt2ijWWmTap7ToCUy1hlBynDNd37JesQ2ZySBMVPcKNrMEUmtkJoNXbJsEPYtFKIWthZSfeAKZDsAw8xCyMUg/ha2MEK7ZEIfMkkRiApCJoiTGWto+fhSZd70LhktIqdwGncmyFplOE776OqUXX6wf0ZM0iMoXELksUruejs1dV0iBNKCyWWQhP1mDxCHl0ksvYV55DS+dRmJnds8IpFRQKtH8zr1pP+EYB2qVbIsEIFOYSGiN8nzazjwDXYtQCJQLOG1+GVBSIYZLlBYsiPEx+ST2ss0E+TxG6xk1BgpcsjLI5/BbWyZrrjpAFszDDJdAqi3SAEIIwmqN/BmnooKU801ImrESgEz1MJTbXMWPHULwzrcTjVSwyjUvzWQZC8JTDM1zABFSjdcg1oLy8IodWK0nZ8On9mywkUa0dSJU7HyPfV1cyj40byHSE2yJcWSlwIyMEOy5J21HHO56UJRKNkICkGmPU6wxqHSKjjPOwFRHEEIxg2isW8agUmlqf3qW6vp1rsV27GluXARJdbWP1mNt5prEZSZevcx9rNlmLVIKqj0bqT39LF4qjaiX0s9geUiiygjtp38Clck0as4SSQAyPUbiWqr8EYeQ2nMvTLkMYoaPyVoIAuzaNZSefKoBionRo3RXJxjNjI97o0l3dTEpnBZfu/TkYvTa1eCnZm5eSYmujJDZ9e0Ujj7UaY+ksSoByPio1fRaxMs0UzzjVGylilAzP1UFAmEspXnzJ+3nRjyga07cZShm8AuSIAWiq3vS9erflx+bj9SuxVYIMaMlpYSRCrkzTsBrzm5ae8ziqNbsBYiYPpwppMRaQ/GoI/D/4i9gpIKc4eYDi0wFVBY+gamFzqaf8D5qTifS82OqqxlcT3r4czon7lqX2AsjKgufQAXBePNrc6bkSAW5664Ujz0a7CYIICb6PAlAtm4xWLQxRMY5ydpOp0UsqrmZ/CdOQo+MIJScUWJBoBGZNLVXX2Nk6StYwBjT0C4AQWcnor6hhXVAkdMsDCIIGknC+jWMduWJI8teobbsVWQmDWjiYrFJa+w1pSeJKmXyp56C35pzkbApQGCsK6vXRqONxtgEIFu5WWWQCPSGDaw4+zNElRLSTs1uKGNfpP2YY/B23xlbdaZWneBw2oVAeB5iuJ/y/Hmuy7B+/fhpy/YiNGUQ9ZNbbELLGQPNGWRbsW7DxZvXOfzl+QsQQ33geXFuY2qMCDvaW2IrNbydd6D9uGPjOi45teawFjsywuuf+izh+o1xiZlNALL14sP9cgceepjB226h5ztXI6TzOewU3oQ1BpVtIXvKyZhSCSnkKJHCNAtAWI2SAaXH5rlGqUa4Ny5YLOQIWpqxOooVz3TXA3SE19KMV8yPggaLku7dSvPmI2WsjSwIa6deWISxSCmxpSHyJ52Ml3e+x1QkdFZrpBSs+d41lG65meGHHnKfbpaVocwigFiEVOhqhf57/p2mbebQd/2NDDzyG4RS6EiPB4lwvoixluJxx6J22hFGKi7/bMUmFggNMpMi/NNzhL0bkY1wr9uIXksWlS9ApONQ7/SLSOPl8qjW7Chw4x6UsK+X2pJnkOkUwtRJgjZh/0mJrVSQ229P8cRjHUPjBO1hgSjSCM+j/7e/Y/Ca62ma20XvvT9EV6outzOLtMisAYhjI4HSY/MJn3sWMq1IX7LmvAsZWb0KqdQUFbiuADGVK5A9+SSiciVO/m3GEbEg/BTR2rWMPDmmulc4Mw/Px3a0ISK7GYdGQGQxHe0Iz499ltFTvLJ4MWb1GkSQikNam6nqkoqoVCF74okEhXbQkyNXNi7arKxdw7ovXoinBGRyRM89T2neY+7jzSItMuuc9IH7H0Bq14rqpZoQq1ax9ksXu6I/YycFZoVwRYfF449D7bA9tlqbWVRHSISOKD32+CQzTwCpjm7Xe7KJawkhsEaTbu+I23bH39vwvIWgay7iNZ1pFS8E2FoNf9vtKJ50wpTag9iEslKw7oKvIJa/gUxnwBqUNgzd/1DipG+dvocBpaht7KUyfx5BUwZhNegIv5AjfPAhem/+PsJT7lQd94ScLxK0FSmccCymVMaT3rTO8KhTbPCCNLWFCzFh1CjhqFsnqrsTYe2MrqO6O2Pzx46GoaOI2uML8QKXHNxcuNiTHnaoRPaEowk62ht8weNEa8fccuttVH/+c7x8wdVmWUOQSVOZ/yi1nh6YStsmAHkLA6Qe8Xl8PnbVGmwQxH0TgA7xcjl6vnU5pSVPg1JgogkYcRGt3EknobbdBlsbiUO6m3DYjUGkA8JlS6m+sqxxOtc1lJrTGTv1m3L4HatiAyA2voYQVF59ndrSl5Hp9OYdZyGwtQpybjfZU092JSoTqgOs1qAU5Wefoecbl+Fls9i4eUoYi02lMavWUF6wwFmKNgHIViPCuu1WfnQB0ui4P7tOEi1AKVStxppzzyMsDbntOdYRrWuRjnZajj+OaLjkejA2E8+SysMMlik9/vho6DQ+tIPObqxSm4lhCZCKoLN7NHIQ31d54ULswPCMiguFUujhYVqOO4Z0Z9ck7VFneozKZVZ//nxUpQLe5K5EYQzlRxe4LkcrEoBsJeoDPIUNa4R/fAqRCibF8q3WqJYW7JIlbPzqZa5kfMKpLGItUjj1RMQ2c6Fa2yy3lUGgBFQemz8mRBtHsjo7IAicpmH6Ziab8lFdHWNe7l5f+cM8POEAvllOrVoNureheOqpU88WMQapFBu/cTnmycXIllbnH425DtZVCIR/fAoT1sCbHdGsWQEQAVRef4Pa8jdcxGfi5geIIrxCkeHb7qTvwYcm0+HEWiTV1UXrx49BD5dcDmVTJ7dxnYDVp58m7OvDStkwsURbEZFJuyy7mCoLEycJMylUsa0RhDVSEvX3U1nyNGTSU1IMTdIeQ4O0HnMUwTZzYu0x+ms3kfOP+h/+T4ZuuZ2g6PwOOcVzlKkUteXLqb7xRgM0CUC2Bg0CVF98GYaGkJ43Kftdj6haBF6Tou+CL1NbsQrrqUaZSD0yZa2leOrJeF0d2DAeLzDdAmQqhV29jpElS2Kt4La0X8wTtOaRxiDE5DovpEBqS9CSwysWYgJr9wsrP/00ds1aZCrtolTTFSQKhY1CvM4u8qef0nDm7Ti/w6O6ei0bL7gAP61wpEZxiHviZ1E+YmiQ2osvjXu2CUDeyviI/4xefAmhQxBqUqyoXqAhjUGkmhHrNrD2vAsQ9ZL0eCMI4Sp1g7lzSB97DAwNOqd+Mw4yusbIY66JysTVVKoliy7msDqctqrXGI0t5EaThPGHqcxbALVKo5hxumU9YGCI9NFHkN52WxdilvG71fMmwrDh/AuRq9dgMxmsjaa9nhECoWtEL7yUhHm3Gge9brO/9hpSKiwRoKdcVhi3YfNZwkd+Rc8NNyGVHA1p1vOA1lI47RRsZweE4SbzItZalB9QXvgE2kRIz3M1YZ6H115ARBG27jCPnWQrgChEteeRge80hafQRjOycBEq8LBWbwIgQFjDdBQonH5K7Hs0DEqs0Qgl6bvxVioPPYTI5xydKnbaL1cMKam89toYnyoByFv8E8Z2/8qVU0ZmppRII/N5Bi6/gqEnn3IRq3p+JKbFSW+3Hc1HHUk0NLxpkgNrEZkM9uWlhMtedaZcfC2/Y44bpoObNyKiyC2lnCmkNV57d8McEkIQvfY6+sWXEekmF4GbJoMiPB8zVKb1iCNIb7/juJFs1hiEUpSWPM3AZZfj53LIyKKQSBQKOeWSViC9DKxa457pLGiw2ro/YQwGXS5jevtQykfa6X7947YCUvoEkWHDF84jGhqIawTtOF8kd/onUG1tqDBECulIHiYuC9LzsQMDlB9f1IgaAXhd3QgDSvmI4WFsRxe2ows5NIz0AqSxePUQb/ya8sInob8f6QUoy5TvKYVEhiFevkDr6adhxvZ0xJ8hKpXYcO6FeGGIVH48OlQ0qIam/LIgPYXp6UOXS7PCD5kVeRA9VEIPl5DKaZOZ8UVpREsL4tnn2PjVb2DlqKllpQBtyeywPS1HHIEZHNl016G1KCmpxuHeutknt+nA+gF2aAC2mUv33bfSffet2LlzYXDAMR92d46NtVF5bD5KSDbVryulQA+VCQ4/nPTOOzlmyLoZZ9zouN5vXAZLFiNaWh0h9wz9OSkF0fAweric+CBbiwYRQ8OoSgUrt2xmqY0ivEKB0h0/pP/+X8SmVuQeWrxHW848GfJZCDfVsmqQqRTVp/9EODiI9dx9pLbpxgwPY3fdne777iKzyy5kdtmF7vvuxu66G3qwRDA35uP1PaKhYapPLUGmgukz2THJA7lWCmee4jSDdLQrVkegPPofeJDy929HFgvYKJreh5kU6rBYpVCVEcTgUKJBthYxSmFqkWtQ2lLH0kKQCei/6FKqbyx3mev4FLbWkN5pZ1KHH4IZGkRI6VIaU7CdiCDArlpJ5elnGkAyra2oA97L3Ht+QGqHHbCRxkaa1A7bM/eeO/De/15Mc2tj41f+9CdYuRyRihOMY9lP6r0gQqIHB8kccjDpXXeN56krVzaiFLWVKxm48KuIphTSWvdMpixwNGOWG50gsUijMbUqepYQPGzdn1JKMBZ/x+3Jf+0iwmoNGYUuWDRuA0y/MBoZpBAb19D7xQsx9UGY1jaanQpnngbZVndtLArtWm/jJa0r7ZDVGrXH5sdV75rUHnuwzb33uJyKNghPITwXEPC6Ophz3z0Ee729URNVeWw+olJ117Jm3Hu497RIXUO0tJL/5Jnu3LdjNIAx9J73ZeTaVaggtWUFh0IhjSGs1MhdegmpnXZ01cVbOVBmQRjC9XQUTjie4ne/Sa1ac/kNOTOCNIFFG42fLVD77X/Sf90NTovEY5mtNgS77UbqowejhwfdBp+QibRxOboM0lQWLUIbjUWQKhQJ8lmXnxgTCRMqBnY+R9DeBkiM1VQWPYFMpUeJFCa+h+ehh4cIPvoR/L/YDbTGyph4Til6b7yFyn8+jMwXXfRsBqQRQgikEigMtUqN4re/QeGkE+KoWBLm3TpcESGJwhr5jx9L4corCMMqKh51sFlWEeHSiFYbVCHP0HevprzoCfAUxkTUG6RyZ52OaSmMoe6c3EQlMynCJU8RrljlejGMifmoxNTAttYlL6UgXLGa6KmnkZnpm6OECbHNWXJnnd6oXjEmQngew08tpvTtK/GzRawJxzn+mz4hJBiIRkbIf+cycice72qxRGJibTUisAjlY6KI3NGHk/veVdSiEBHpGRM1W2GRKDwb0vuFL1EbGkQK5RhDrCaz555kDv579PBQA3h1cEkhEFISDg7S8onT8Lu7wWiskJtOtsV0J9YYVFcXLaecQjQYX1868mkap7yHGSqT/vBBNO21F8I67SGFolYaov8L5yNNGGuqGXBnASiFwBBVK2Sv+A6F447BRCHC8zdbA5YA5K0EECFQ0o1xJtIUD/8YhWuuwliDGpOY26SZEZfAi+YWeP5l+i79ZsPHEfFkwuwnT4fmJue71B+uklgFeqCPlnP/lbaLvoRKBY7SdFJRrRlf+xUf8kIIvFRA28UX0Pqvn8P097pEopL1yimwGpPJ0HrWafHLBEK7rsGBr1+G/dMLiOZmlyScyUNTHkqH6GqN3L99l/yxR6Mj11AlhUCKpNx96zS3pMKEmtwhB5O//ipCK5BhhJTSsbSzmQ6/KMIr5KjddTcD9//MhX6tBW1Jv+OdpA76MHZwGCmVY0ExYPvLNF38Zdo/fw5EelxfyCg4HOOIlBIzkYCqTnIXafJf+BxNF11IODiMF/sRUins4DDpfziIzF/u7ZzvuDRl8IEHqN12J14xj4yizX4+iaM8UlFIFBpyV11B/qgjiKIorkaeXSRys4v2h3gwpq8wUUTrhz5E/oar0UJgw9CZWzOwHIy1BJkmhi7+KiNvvBG3oLr+iZZPnoZNp0FYrNFE5RLN37yU9rP/Ma6enWhWWaIoQkrBPT/8LT/88R9cMm7i5Fkh3Gu1pu3/nE3rNy8lrJQR2ropuKk0zbH2sFpjlaKyYiWDF16KbErH/fYzeUASwggdWbLXXEHusEMxUYjyPJQQzDbuuNkDkHp8v14L6CnCMKL1H/6ewk3XopWEWgTe5h+JsBaTClAbN9J//gVYHYKUGK3J7LM3wYf+ATb2ElpN7qoryX3i5EYkaWwexmLR2uJ5Hj+469ecc97tfPaLt3LXvb/F89QkkDhfQ2G1pnjqKbRe8z201eiN6wkOOpDMvu9yfFZCoq1m4LwLkevXz3zkm5KIWoRGk7vxKrKHHEIURkjlUe/VEtMQ7SUAeYtrjkZIVMdlFUagPEd+0Py3B1K8+UYiz0NWauPnekwnWiNzOcyv/4v+629yGzdyjUbNZ5xCpZineO21ZI88zBUgemoiXp3zrSRXX/8An7/wDrLZVppbmvjcl+7gupsfwvMUup53GQsU5TRg7rBDyd5yA7q9i+bTTnVdjFGE9RTD19+M/vVvUPlcHNLdlEPuiiVlGBFJQe7G62n50EHYyIGj7rVYrRsh5dkCEWG3di5Ja7EIqq++hpWWzI47YaIIVNxQhMWGEcL3GX5sHoNnno1fq0DQ1EjQbSI8hkVgwpD8fXeTefe+GKMxYURt1Uqad9p5XBXt6C2ZmPFT8s3Lf8R3r/kFxULW+TKO9p3+gUHO/cyhfOFzR2OMGUNmPeY6xlGXVlasQnW1I5WHVIqRxUvoP/p4lKdiLq7NRXIVtlYl8hS5G66h+W8PxEahC2ogMFZjtMHzfKqrVmIjQ3r7t80KYuvZ0VEoAF2j94RTGf7ZLxx3rnDJPmGFC1uGES1/dQD5224kzDRjqxXXDGU3rZqEBKlDBr70ZczAgIvw+D5NO+3sADYBHCY+j6SUnH/xnVxx9S9pKxax9TFVMfKKhQKXf+9BLrz0LscTjJ3USy+kxBiNv91clOcjpcAMDDBw/gUIXXO9YZu5f5SCag3tBxRuvo6Wvz0QHUUY6bsTwBiEUCjPp/zwr9h4/CnYkfLos01MrLf6J3Sl6f5uu+PlCgyefha9512IHhjAKonWrulI+gqiGk3vez+5224ibG1BjJRdD8mmJLLIbA678En6rrsJhOtMrNdAjd2N2kQIIdDa8pnP38JNP/gtbR1ZTN0/GNMwZayh2J7lhlt/zTnnft9FtoSYNMdcSlcCUm/d7bv+Rnh8ESqbh8huOurkSWxlhCgd0HrrdTT9zd9gohDPUyhhXU++lJjhYXov/gp9J5+OSjcT7L6HA2vSD7KViDEoIHjf/ohUQHjH3fQcfgzl+fNQXuw4G+soQaOI5v32o3jHLZhcHkaGYmqd8dWuAuvqoXyF2NCDeu97aDn6sEbZyETWQq0tSnpURiqc+enrufcnC+lsL6B1vIknzj1AYjR0tBe5+8cL+eSnb6ZaqSKl80smahKrJNpYWo49EvW+/RAbesBXcc3W5GpdoSSiMoJtzpC7/SZaD/grdOiy7ph4Aq+nGHniCXqOOIbw5ltRviA4YH/ULKIflbPpQwZ/tT9SWFQxi1j2KkMnfIKeb3/XlU5ICZHrtCMKyey9D7m7bsUU26E8hFSjzO4S43wX30P09qDfuy/5e24nvetuLlo0rgzDorVGKcnAYIlT/vF6fvnIM3S053A+r4qXN+XSGtrbszz4yFOccvZ1DA6VUGM03xiUAJrUTruQu/t2zP77Qm8P1nd+lsQBRVjr+mLKZUxLlvztt9H03vdiopoLJNS1ho7ovfIqBo8/CV56GVksgvQIPvC+WRX+3PqddOozLQTRUD+9HzoMuXY1pJtAh0QDg6j37U/ua5fi77UnVkdYIR1/r6+oPfss/ad8ErlxHbQ0Q+QKDZXyiXp7kAd+kOKN1+Llsm7u4DizyhBpi6cU69b3c/qnbmLx08spFpqJIgNbEAvyPElfb4l99tmB71/7Sbo780RaO3Lpsds1vodoYJDesz+N+d3v8AptribLGvAUolRGF9pouf1GMnvvgwgjtJIIa5DKo/bySwxccAnm0Ucdw6LnIypldPc2FB/+GV5r3mmhpCd9KzkFhHBzNrJ51Ac/4MYYCGfT+21tyCf/SN8xx1O65TZXYiElVoIINem99iJ/z+2YOXMRw2WE76E8hendgH/YoRRvvQmZi2k6J4SHIw2eUixfuYHjT7uKJc+soK3Y7MYLCDtNceQUboOAKDIUiy0sfmY5J512NctXbMBTimjiiCzp8iQyl6V46434hx6K6d2AUhJ8D0ojRO2d5O78Pk1774OoaUcuKSVSeQzfcReDhx+HXLAAr9iGlU5zUh7B++AH8LJ50NGsAMds0pSuqA9oPvQQdHp0GqzRESbbitI1Sl++mP7TPkm4YiVSKbQUmLBGeo/dKdx1O+Zt28JQCdPfjzrxJArXfw+vKRNX3I53yN3pLnnhpVUcd+o1vPJqD8VsC2HompriwpVJS8Q0RI4rK17x30MN7dlWlr66keM/cS0vvLwqBsl4c0so57h7mQzFG76HOvEkor4+GC6ju7vI33Ub6Xe8A8IIoyzC84jWrKH3H/+JkS9+CcIKNpt1HYjWgrFE6RRNHzu0wZk1a7aNnU0ztaybT9h3zHGwaDG2pWmUZVEIpPCIBnuhey4tXz6PzOGHIQFTqyGDgNry1+g54TTSHzyQ3NcuBmPj9tvxGyaKIjzPY/GfXuesT91KT3+ZluY0URRNoR6mjjSNYeiZZC56nsdwuUJbPsNN157Ou965Y+M9J8SUMfH99V30FfQjvyZ7962kdt4VW6u5OYlA+aFfUvrK15ErViDzBacNG2PjJJSGse/el8KP/h0lZQKQrRYf2pV7DP3kP6j+8zmotmLcvxH/v7CgPESlgqnUEMcdQ+6C81C5XKOfO+rvReUKrkfEAGo87VsUGTxP8uiCF/k/n72LcrVGcyog0mYCQZxACosxYkrq0YaKF0wenmktypOUqlWaUgHXXXkyf/2+PRrvPRZ6Nu4nsRZ0Xy9+sQ2jtdOQpRKD3/oO+s67UL4HmbTrrR97l0oR9faSuvoKWo86svEME4BslQgBi8FUKvR9+GOIZ56FpkxjB9bPcitdqNX29aP32JmWSy8hc9DfI4Ua3RwTs8gWIu1O8V/95k/887l3YxEEQYCOq27Hagxr3KizVCBjWh456V6lEFRrEUE9FD2WPMGCUopaGIKA7112PB/++3c6TaK88dpnzL1arbEYqr/7PQMXfg2efRY/H/e9x1O4xqGzPIJ5514UH/oFMpN2LJSzqKB3dgEEV1aOhNrTz6BffgmRSo0/omNfxQpcqUWpRJjKkPq7DxI0t8Rj0Ca7blq7uqof/2whX7zopwS+j+cFaBOOs5XqlevptGRuV5EXX11HOvDifMioKCWo1EL22LmTNWsGqFT1lKPdpVSEOqRWq/GtrxzFMYe/t3EvU5mYCEE4Uqb6m0fxyoPYlmbHDlkfQTpx7EO1itxtd9J/+Q6MASVnV7n7rAOIM83NpAEyb96t0W7jKMUP7v0Dl3z9QTJNKZT00DZslI+IWGtYodjY28+xh+/NOf90EAcddgXSS+Mp0QiCGQ2RsZioyiP/8TmuvO4Rfnj/U3QUc4BFSlufgev+LhTaasqlKl85/2BOPfGv0VojpUUIbypFusVK4M/5zN5Koi655JJLZtuHFvX543Fj0eYXUxIUWGsxxqCUx7U3/oavXv4w2dbm2G+wcfRJNKJW6YxHa7Nku23ynPuZD7HXnm9jcGiYVSv7yTT5RJGbZpXLBjQFHh8/ch8O/9i76Wxv5tnnViI9dx9RJOLNKgAVj5qWBEGKX/3meXwl2X+/neN7mFzk6OYdbsHnh6nnGSYaJJFNaQ5iAFx2xYNcfctjFPPNrq7KyglmkKVSseyxa4Hr/+145m5TdM1UGnzPwwrDj376JBd985cAXHr+Rzj2yHeDFYSRxlOu4nbVml7O/uy9vLS0j3RaTp68Jh0VaW9fmX868/2c968fjZOkruAwkUSD/D/yY0yDlOGir97PTXcspK3QEvNlydEeizj5Zy0EvmLVmkFWrt7IAe/bDSkVkTZIKZi34BW+/PWH0MZpm4VPrmDP3brYdm6BWqixVjA0XOXLX/sZC59cSXNz0JgUNb6vwwGzuTng9/Nfo3fjIH/7wd1dn4hl1iT3/pwik0ewpZrDlapH2nDO+fdx+z2LaWtrxk0iiGeN2AlM68LRurVmW/n5L19m0eJlpFI+TZkUSiluufMPrOstEQQ+QeCzrrfELXc+ilKSpkyKVMrnyaeW8YuHX6I124o2AqxqvM8Y2mpAYbSkva2FO+5bzDnn/Yha6PrdE1shAcib1wo6IgyjMW6sndLnEFj6B8p8+nP38R8/f46O9lZM5MLCU3bqxV8SQRRFdHe1sO9fbs/SpWu584cL0Nrw3vfsirKOYkdgUFay/3t2QWvLnT9cwNKla3jXO7enuytHFGmkdNXCQroM+6SRWUKgtaS9Lcf9D7zAP33uPvoGyq68ZkqUjH7eMIwwOko2ROKDjN/4Yaj5yrd+xqIl68hlA6LIIIR1jUxjfk5KwcBAhddXDpBtTuHaMzY5qTAODFjC0NDWnuavD9iFBx9+ng29Zd7/7u2YM7fIrx55gXQqBUClWuVDB/0Fa1b3Mn/RCjqKGT764bfz+/mv0rNxBN+XcSRqQofhhPsQViA9GBwO2XHbLIV8Cm2mKDK0oDzJwGDIu/+yk4vPPxTfU4lJlgDE7Y465c6y1zZw4ul3sLqnREs6INKAMBM2u0UpSTol0VoiN1uRK8ac0s4XGB6pks6kXKNjGGIMNGVSsUPtarXKlSpSgPJ8rIDKSJWWTBohN/F+9eCAGNUIBoEnoVq1RDoanz+MQeYpydBIyDbtzdz9/ZPYecd2jDFxJ2MCkMQypc5LJXjx5bWceva9DFdqZPwU2pgJIHE7y9ipNMf4zPrEfxaAUpLQCDoKKfZ71zbc/8sXyTZnqIV6tB1XCPxAMThc4ciP7MbCxWvY0FfFlxatabTezviEt4zOJhz3zwLpuYRkSyrFD244hj126248i0QSH2T0QUhBpDV77NbN1d85lED6lGshSoAxAjt22bGeRX1NmPMkxiyUK4SMJENDmpWrejnowF246LyPkMr4rFk/TLkcNq5VLoesXTtMJuNz4XkH86EDd2XVqj6GhiOiyEW+NgWOSb5QvNkn9hUqBSO1iEB6XPOdQ9hjt+44wZiAI9Eg0xy1WjsT6okn3+BTn/8p5RFNUyaIS8o3+zhH/xTjN6wOI7q6Wtlr907yRZ8zTt6fud0FHv7Ns/zn75YxMFxlyZI1AOyz9xzyLSn+7sCd+PDfvYPVa/v5/p0L6e+t8OxL61m7voTnSabjgtusYrEWT3mUKyGZjOS6bx/Ofu/evlGiP9vYExOAbKHUa5meeW4Vnz73ftZsGCGXTRPOuAtQTtqwOrTMaU9zy7WHs922nWgTorUh8J1jfuPt87j6picA+MxZ+3HWJw4AoBbWUFKilMfylRs489P3s3rjCL4ntjxsGxeZ+Z5kcKhCd3uGqy8/lHe+fe709VsJQBKATAmSyKA8yfIVPXzu/Ad56rn1FAqZuDrDbuaQFVOYcJZySdNW8Lj5qqPYeYd2tA7x/YAbbp3Hd69ZQKGtGYulv6/Ev37qfZx92gGEYYTn+Sx7fQNn/stP6OmLaMn4jrBkhi27dXNMIFAKensrvGuvTr7zjY/wtm2Lcc98kmlPfJAtEOVJtDa8bbs27rjx4xx92J4MDEQYa1G+GjN8Rk6xJrfSWiNpbc2wrmeEvr4RgsAjk/HxPMULSzfip1N4ysNXPn6Q5oWlPXi+R6bJxw8UfX1l1m+skm1Jo2HGw2/q4FBKoq2hr6/KUYfuzm3XHx2DwyTgSADyJkGiHDFbU7PHZZcczFcu+CtSnmBoKHQjpev1TWKqxzomk45CSkW1ppnTmWW77XPc/ePFfOrzD/Dy0vXst+/bXD4lJsA1kWS/fbfn5aXr+dTnf8HdP17Mdm8r0NXZSqXmqmrF1EOnJy0pFJ7yGRqKSHuSSy/8AJddcjDNzT7GRIlZlZhYfwbX3Zo4Sah45bUNfPvKP/D7+SsJMgFNaYmJBIYxoWArJzn/jhbY0toaUMwFPP/yRjCSQt5n7nZ5Xnu9HxVTIWpr2HGHPKtW9NM3EIK0vH3XdnoGqjE46zNBprbubAxLqWCkaqiO1Pjg+7fl3M9+gF3iHIfTQAk4EoD8WZ33CKU8wHL/A89x4+1/ZNnrg2SaU2QChTZmDD3o2AThqIoxxhJFhkzai9lKXBY/lfLG5Teq1QjfVy5rbmGkEuIpiVKbds6lFCghqdQiyqUaO+6Q4x9PexdHfHRPQCT+RgKQ/1FdMoZIWjIwWObeHz/NfT97idWrS6TTPum0HxOBmGlPeOeT2Ml/H4Mp10c+egEpRCOROBGAAuKst2CkWqM6ErHN3GaOPXQ3jj96b3LZDNbquNBSJJZ1ApD/WZC4k9g2TJ2e3mF++sCL/OKhpbzyxgAgaMp4eJ4Ca1y+wtrG7M3x2/xN5BwECKTr4RKCKIwoVzQGwS7bZzn0I7tw1Ed3p62tJdZ89Xt9M72ECUASgLxp38TVcdUd3fJIjd/Pe52Hfr2Mp5ZspKevjBSSVMoj8KXLaAv3unqj4gzx0NA0dTMtDC3VmsZYTXs+wz57d3Dw3+3E3xywA02ZIAbG5rPuiSQA+X8EFEadZ2D1mkEeX7SSeYtW8tyLfaxbX6JS1SAkyhN4nsCTblqtkDYexll/vcECxgqsdlxeUWRjulJDOqXo6mjh7XsUeP97tmX/98xl7pxs470jbeNJbwkwEoD8rwIKjT7wsYWwQ8MVXnmtlxeX9rD0lQHeWNnPuo0jDA1WKVcjwtBphcYUBOnA5nnQlPbJtqbobE+z/dwCu+2aZY9d29h5xyKtLekxzr8rd5dCkOAiAchbxvwSwjYc6LFSqdQYGKoxMFRleFhTqYaxhnBE1emUT2uLorU1Ra41IJMOpgwYWCsSMyoByNahWYhZ5t2GfhPXMPUwcD2LnjzbBCBbMWjqDInuuykcc+qVuQkYEoAkksj/QkkyRokkkgAkkUQSgCSSSAKQRBJJAJJIIglAEkkkAUgiiSQASSSRBCCJJJIAJJFEEkkAkkgiCUASSeS/L/8XqBesLTMIl/0AAAAASUVORK5CYII=" alt="ELM" />
+  <div>
+    <div class="hdr-title">Field Reference</div>
+    <div class="hdr-sub">Eternal Light Michigan &middot; in-lite 2026</div>
+  </div>
+  <a class="back-btn" href="index.html">&#8592; Dashboard</a>
+</div>
+
+<div id="search-wrap">
+  <input id="search" type="search" placeholder="Search fixtures by name..." oninput="filterFixtures()" />
+  <div id="search-count">215 fixtures &middot; all categories</div>
+</div>
+
+<div id="app">
+
+  <!-- LEFT COLUMN: HUB + CABLE + RULES -->
+  <div class="left-col">
+
+    <div class="section">
+      <div class="section-hdr"><span class="section-hdr-title">Transformer (HUB) Capacity</span><span class="section-hdr-icon">⚡</span></div>
+      <div class="section-body" style="padding:0">
+        <table>
+          <thead><tr><th>HUB</th><th style="text-align:center">Max VA</th><th style="text-align:center">Outputs</th><th>Control</th></tr></thead>
+          <tbody><tr><td class="td-hub-name">HUB-75</td><td class="td-center">75</td><td class="td-center">2</td><td>Buttons + light sensor</td></tr><tr><td class="td-hub-name">HUB-100</td><td class="td-center">100</td><td class="td-center">2</td><td>Touch screen</td></tr><tr><td class="td-hub-name">SMART HUB-75</td><td class="td-center">75</td><td class="td-center">2</td><td>in-lite app</td></tr><tr><td class="td-hub-name">SMART HUB-150</td><td class="td-center">150</td><td class="td-center">3</td><td>in-lite app</td></tr><tr><td class="td-hub-name">SMART HUB-300</td><td class="td-center" style="color:var(--success);font-weight:700">300 VA</td><td class="td-center">3</td><td>in-lite app — max 130 VA/output — <strong>10/2 only, max 525 ft (160m)</strong></tr></tbody>
+        </table>
+      </div>
+      <div style="padding:10px 14px">
+        <div class="warn-box"><strong>⚠ SMART HUB-300</strong> — total capacity is <strong>300 VA</strong> across all three zones. Maximum load per individual output line is <strong>130 VA</strong>. Do not put more than 130 VA on any single zone.<br><br><strong>⚠ Cable:</strong> SMART HUB-300 requires <strong>10/2 cable only</strong>. Maximum cable run is <strong>525 ft (160m) per line</strong> — double that of other hubs.<br><br><strong>⚠ Fixture caution:</strong> Do not connect <strong>DB-LED, HYVE 22, or FUSION 22</strong> fixtures to the SMART HUB-300. Use DOT and DOT 22 for those fixture types instead.<br><br><strong>⚠ Cable:</strong> SMART HUB-300 requires <strong>10/2 cable only</strong> — no 14/2 or 12/2. Maximum run is 525 ft (160m) per line.</div>
+        <p style="font-size:11px;color:var(--dimmer);margin-top:8px">Max VA is hub-TOTAL across all outputs combined — not per port. Each port gets its own full cable-length budget independently.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-hdr"><span class="section-hdr-title">Cable Max Run Length</span><span class="section-hdr-icon">📏</span></div>
+      <div class="section-body" style="padding:0">
+        <table>
+          <thead><tr><th>Gauge</th><th style="text-align:center">Max (ft)</th><th style="text-align:center">Max (m)</th><th>Notes</th></tr></thead>
+          <tbody><tr><td class="td-gauge">14/2</td><td class="td-center td-green">131 ft</td><td class="td-center">40m</td><td>Step up to 10/2 above 35 VA</td></tr><tr><td class="td-gauge">12/2</td><td class="td-center td-green">250 ft</td><td class="td-center">75m</td><td>Good for reach without 35 VA trigger</td></tr><tr><td class="td-gauge">10/2</td><td class="td-center td-green">262 ft</td><td class="td-center">80m</td><td>Required over 35 VA — HUB-75/100/150</td></tr><tr><td class="td-gauge">10/2</td><td class="td-center" style="color:#f0a020;font-weight:700">525 ft</td><td class="td-center" style="color:#f0a020;font-weight:700">160m</td><td>SMART HUB-300 only — 10/2 required, double the run length</td></tr></tbody>
+        </table>
+      </div>
+      <p style="padding:10px 14px;font-size:11px;color:var(--dimmer)">Measured linearly from the transformer to the last fixture on that run. Each port gets its own full budget.<br><strong>Exception:</strong> SMART HUB-300 supports up to 525 ft (160m) per line on 10/2 cable — and requires 10/2 exclusively (no 14/2 or 12/2).</p>
+    </div>
+
+    <div class="section">
+      <div class="section-hdr"><span class="section-hdr-title">Three VA Thresholds</span><span class="section-hdr-icon">⚠</span></div>
+      <div class="section-body" style="padding:0">
+        <table>
+          <thead><tr><th>Threshold</th><th>Applies To</th><th>What It Means</th></tr></thead>
+          <tbody><tr><td class="td-thresh">35 VA</td><td>A single branch/run</td><td>Switch from 14/2 to 10/2. Not a cap — a switch point.</td></tr><tr><td class="td-thresh">50 VA</td><td>One CC-2 connector</td><td>Max load through one branch splice. Over 50 VA downstream? Use 2x CC-2 at that junction.</td></tr><tr><td class="td-thresh">Hub Max</td><td>Entire hub, all zones</td><td>Total VA across every fixture on every output combined. Check hub table above.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-hdr"><span class="section-hdr-title" style="color:#f0a020">⚠ Special Fixture Rules</span><span class="section-hdr-icon">🔦</span></div>
+      <div class="section-body">
+        <div class="rules">
+          <div class="rule"><span class="rule-dot" style="color:var(--danger)">·</span><span><strong>BIG NERO / BIG NERO NARROW</strong> — must use 10/2 cable, max 40m (131 ft) cable run, and count limits apply: HUB-75 max 4, HUB-100 max 7, SMART HUB-150 max 11 total (max 7 per line). These override normal VA calculations.</span></div>
+          <div class="rule"><span class="rule-dot" style="color:var(--danger)">·</span><span><strong>SMART fixtures</strong> (SMART SCOPE TONE, SMART FLUX TONE, SMART EVO FLEX TONE, etc.) only work on SMART HUBs — will not function on HUB-75 or HUB-100.</span></div>
+          <div class="rule"><span class="rule-dot" style="color:var(--danger)">·</span><span><strong>SMART HUB-300</strong> — requires 10/2 cable only. Max run 525 ft (160m) per line. Do not connect DB-LED, HYVE 22, or FUSION 22.</span></div>
+          <div class="rule"><span class="rule-dot" style="color:var(--warn)">·</span><span><strong>Punctured cable?</strong> Cut it completely. Rejoin with CC-2. After one CC-2 max downstream load is 50 VA. After two CC-2 connectors max is 100 VA.</span></div>
+          <div class="rule"><span class="rule-dot" style="color:var(--warn)">·</span><span><strong>Branching</strong> — always use the same cable type on both sides of a branch. Never mix 14/2 and 10/2 at a junction.</span></div>
+          <div class="rule"><span class="rule-dot" style="color:var(--warn)">·</span><span><strong>Non-in-lite components</strong> void the warranty entirely. Only use in-lite fixtures, cables, and connectors within the system.</span></div>
+          <div class="rule"><span class="rule-dot" style="color:var(--muted)">·</span><span><strong>Easy-Lock gel</strong> — the connector contains a moisture-protection gel. Wash hands after handling. Avoid eye contact.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-hdr"><span class="section-hdr-title">Key Rules</span><span class="section-hdr-icon">📋</span></div>
+      <div class="section-body">
+        <div class="rules">
+          <div class="rule"><span class="rule-dot">·</span><span><strong>Branch distance</strong> = segment length + all parent segments back to hub. A 50 ft trunk + 40 ft branch = 90 ft cumulative.</span></div>
+          <div class="rule"><span class="rule-dot">·</span><span><strong>35 VA on a branch</strong> → step up to 10/2 regardless of distance.</span></div>
+          <div class="rule"><span class="rule-dot">·</span><span><strong>50+ VA through a CC-2</strong> → use two CC-2 connectors at that junction, not one.</span></div>
+          <div class="rule"><span class="rule-dot">·</span><span><strong>Balance zones</strong> — spread VA evenly across outputs. Hub total is the hard limit.</span></div>
+          <div class="rule"><span class="rule-dot">·</span><span><strong>Test above ground</strong> before burying any cable.</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /left-col -->
+
+  <!-- RIGHT COLUMN: FIXTURE VA -->
+  <div class="right-col">
+    <div class="section">
+      <div class="section-hdr"><span class="section-hdr-title">Fixture VA Reference — in-lite 2026</span><span class="section-hdr-icon">💡</span></div>
+      <div class="section-body" style="padding:14px" id="fixture-body">
+        
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Recessed</span><span class="cat-count">43 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">BIG FLUX (without ring)</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">BIG FLUX ASYMMETRIC (without ring)</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">BIG FLUX ASYMMETRIC Black</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">BIG FLUX ASYMMETRIC Pearl Grey</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">BIG FLUX ASYMMETRIC Stainless Steel</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">BIG FLUX Black</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">BIG FLUX NARROW (without ring)</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">BIG FLUX NARROW Black</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">BIG FLUX NARROW Pearl Grey</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">BIG FLUX NARROW Stainless Steel</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">BIG FLUX Pearl Grey</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">BIG FLUX Stainless Steel</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">BIG NERO</td><td class="va-confirm">11.90 VA</td></tr><tr class="row-alt"><td class="td-name">BIG NERO NARROW</td><td class="va-confirm">11.90 VA</td></tr><tr class=""><td class="td-name">DB-LED (CW)</td><td class="va-confirm">0.50 VA</td></tr><tr class="row-alt"><td class="td-name">DB-LED (WW)</td><td class="va-confirm">0.50 VA</td></tr><tr class=""><td class="td-name">DOT (without ring)</td><td class="va-confirm">0.80 VA</td></tr><tr class="row-alt"><td class="td-name">DOT 22</td><td class="va-confirm">0.50 VA</td></tr><tr class=""><td class="td-name">DOT 22 (without ring)</td><td class="va-confirm">0.50 VA</td></tr><tr class="row-alt"><td class="td-name">DOT 22 Black</td><td class="va-confirm">0.50 VA</td></tr><tr class=""><td class="td-name">DOT 22 Pearl Grey</td><td class="va-confirm">0.50 VA</td></tr><tr class="row-alt"><td class="td-name">DOT 22 Stainless Steel</td><td class="va-confirm">0.50 VA</td></tr><tr class=""><td class="td-name">DOT Black</td><td class="va-confirm">0.80 VA</td></tr><tr class="row-alt"><td class="td-name">DOT Pearl Grey</td><td class="va-confirm">0.80 VA</td></tr><tr class=""><td class="td-name">DOT Stainless Steel</td><td class="va-confirm">0.80 VA</td></tr><tr class="row-alt"><td class="td-name">EVO FLOOD</td><td class="va-confirm">8.00 VA</td></tr><tr class=""><td class="td-name">EVO GROUND 300</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">FUSION 22</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">HYVE 22</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE 22 COOL</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">LUNA (without ring)</td><td class="va-confirm">5.00 VA</td></tr><tr class="row-alt"><td class="td-name">LUNA Black</td><td class="va-confirm">5.00 VA</td></tr><tr class=""><td class="td-name">LUNA Pearl Grey</td><td class="va-confirm">5.00 VA</td></tr><tr class="row-alt"><td class="td-name">LUNA Stainless Steel</td><td class="va-confirm">5.00 VA</td></tr><tr class=""><td class="td-name">NERO</td><td class="va-confirm">4.70 VA</td></tr><tr class="row-alt"><td class="td-name">PUCK 22 Black</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">PUCK 22 Pearl Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">PUCK Black</td><td class="va-confirm">2.50 VA</td></tr><tr class=""><td class="td-name">PUCK Pearl Grey</td><td class="va-confirm">2.50 VA</td></tr><tr class="row-alt"><td class="td-name">SMART FLUX TONE (without ring)</td><td class="va-confirm">9.50 VA</td></tr><tr class=""><td class="td-name">SMART FLUX TONE Black</td><td class="va-confirm">9.50 VA</td></tr><tr class="row-alt"><td class="td-name">SMART FLUX TONE Pearl Grey</td><td class="va-confirm">9.50 VA</td></tr><tr class=""><td class="td-name">SMART FLUX TONE Stainless Steel</td><td class="va-confirm">9.50 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Path Light</span><span class="cat-count">38 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">ACE Corten</td><td class="va-confirm">5.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE Dark Grey</td><td class="va-confirm">5.30 VA</td></tr><tr class=""><td class="td-name">ACE HIGH Corten</td><td class="va-confirm">5.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE HIGH Dark Grey</td><td class="va-confirm">5.30 VA</td></tr><tr class=""><td class="td-name">ACE HIGH Rosé Silver</td><td class="va-confirm">5.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE HIGH White</td><td class="va-confirm">5.30 VA</td></tr><tr class=""><td class="td-name">ACE Rosé Silver</td><td class="va-confirm">5.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE White</td><td class="va-confirm">5.30 VA</td></tr><tr class=""><td class="td-name">BIG VOQUE</td><td class="va-confirm">8.00 VA</td></tr><tr class="row-alt"><td class="td-name">BIG VOQUE 120V</td><td class="va-confirm">5.20 VA</td></tr><tr class=""><td class="td-name">DISC</td><td class="va-confirm">4.90 VA</td></tr><tr class="row-alt"><td class="td-name">DISC LOW</td><td class="va-confirm">4.90 VA</td></tr><tr class=""><td class="td-name">EVO</td><td class="va-confirm">2.10 VA</td></tr><tr class="row-alt"><td class="td-name">EVO LOW</td><td class="va-confirm">2.10 VA</td></tr><tr class=""><td class="td-name">LIV Corten</td><td class="va-confirm">1.50 VA</td></tr><tr class="row-alt"><td class="td-name">LIV Dark Grey</td><td class="va-confirm">1.50 VA</td></tr><tr class=""><td class="td-name">LIV LOW Corten</td><td class="va-confirm">1.50 VA</td></tr><tr class="row-alt"><td class="td-name">LIV LOW Dark Grey</td><td class="va-confirm">1.50 VA</td></tr><tr class=""><td class="td-name">LIV LOW Rosé Silver</td><td class="va-confirm">1.50 VA</td></tr><tr class="row-alt"><td class="td-name">LIV LOW White</td><td class="va-confirm">1.50 VA</td></tr><tr class=""><td class="td-name">LIV Rosé Silver</td><td class="va-confirm">1.50 VA</td></tr><tr class="row-alt"><td class="td-name">LIV White</td><td class="va-confirm">1.50 VA</td></tr><tr class=""><td class="td-name">MINI SWAY Black</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">MINI SWAY EXTRA LOW Black</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">MINI SWAY EXTRA LOW Pearl Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">MINI SWAY LOW Black</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">MINI SWAY LOW Pearl Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">MINI SWAY Pearl Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">NAIL</td><td class="va-confirm">1.50 VA</td></tr><tr class="row-alt"><td class="td-name">NAIL LOW</td><td class="va-confirm">1.50 VA</td></tr><tr class=""><td class="td-name">SWAY Black</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY EXTRA LOW Black</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">SWAY EXTRA LOW Pearl Grey</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY LOW Black</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">SWAY LOW Pearl Grey</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY Pearl Grey</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">VOQUE</td><td class="va-confirm">5.20 VA</td></tr><tr class="row-alt"><td class="td-name">VOQUE 120V</td><td class="va-confirm">8.00 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Wall</span><span class="cat-count">46 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">ACE DOWN 100-230V Corten</td><td class="va-confirm">11.80 VA</td></tr><tr class="row-alt"><td class="td-name">ACE DOWN 100-230V Dark Grey</td><td class="va-confirm">11.80 VA</td></tr><tr class=""><td class="td-name">ACE DOWN 100-230V Rosé Silver</td><td class="va-confirm">11.80 VA</td></tr><tr class="row-alt"><td class="td-name">ACE DOWN 100-230V White</td><td class="va-confirm">11.80 VA</td></tr><tr class=""><td class="td-name">ACE DOWN Corten</td><td class="va-confirm">5.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE DOWN Dark Grey</td><td class="va-confirm">5.30 VA</td></tr><tr class=""><td class="td-name">ACE DOWN Rosé Silver</td><td class="va-confirm">5.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE DOWN White</td><td class="va-confirm">5.30 VA</td></tr><tr class=""><td class="td-name">ACE UP-DOWN 100-230V Corten</td><td class="va-confirm">20.00 VA</td></tr><tr class="row-alt"><td class="td-name">ACE UP-DOWN 100-230V Dark Grey</td><td class="va-confirm">20.00 VA</td></tr><tr class=""><td class="td-name">ACE UP-DOWN 100-230V Rosé Silver</td><td class="va-confirm">20.00 VA</td></tr><tr class="row-alt"><td class="td-name">ACE UP-DOWN 100-230V White</td><td class="va-confirm">20.00 VA</td></tr><tr class=""><td class="td-name">ACE UP-DOWN Corten</td><td class="va-confirm">10.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE UP-DOWN Dark Grey</td><td class="va-confirm">10.30 VA</td></tr><tr class=""><td class="td-name">ACE UP-DOWN Rosé Silver</td><td class="va-confirm">10.30 VA</td></tr><tr class="row-alt"><td class="td-name">ACE UP-DOWN White</td><td class="va-confirm">10.30 VA</td></tr><tr class=""><td class="td-name">BIG CUBID Dark Grey</td><td class="va-confirm">2.00 VA</td></tr><tr class="row-alt"><td class="td-name">BIG CUBID Rosé Silver</td><td class="va-confirm">2.00 VA</td></tr><tr class=""><td class="td-name">BIG CUBID White</td><td class="va-confirm">2.00 VA</td></tr><tr class="row-alt"><td class="td-name">BLINK Dark Grey</td><td class="va-confirm">1.70 VA</td></tr><tr class=""><td class="td-name">BLINK Rosé Silver</td><td class="va-confirm">1.70 VA</td></tr><tr class="row-alt"><td class="td-name">BLINK White</td><td class="va-confirm">1.70 VA</td></tr><tr class=""><td class="td-name">CUBID Dark Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">CUBID Rosé Silver</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">CUBID White</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">DISC WALL</td><td class="va-confirm">4.90 VA</td></tr><tr class=""><td class="td-name">DISC WALL 100-230V</td><td class="va-confirm">11.80 VA</td></tr><tr class="row-alt"><td class="td-name">EVO DOWN</td><td class="va-confirm">2.10 VA</td></tr><tr class=""><td class="td-name">EVO DOWN 100-230V</td><td class="va-confirm">11.50 VA</td></tr><tr class="row-alt"><td class="td-name">HALO DOWN</td><td class="va-confirm">5.00 VA</td></tr><tr class=""><td class="td-name">HALO DOWN 100-230V</td><td class="va-confirm">11.50 VA</td></tr><tr class="row-alt"><td class="td-name">HALO UP-DOWN</td><td class="va-confirm">10.00 VA</td></tr><tr class=""><td class="td-name">HALO UP-DOWN 100-230V</td><td class="va-confirm">20.00 VA</td></tr><tr class="row-alt"><td class="td-name">LIV WALL Dark Grey</td><td class="va-confirm">2.50 VA</td></tr><tr class=""><td class="td-name">LIV WALL Rosé Silver</td><td class="va-confirm">2.50 VA</td></tr><tr class="row-alt"><td class="td-name">LIV WALL White</td><td class="va-confirm">2.50 VA</td></tr><tr class=""><td class="td-name">MINI SWAY WALL Black</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">MINI SWAY WALL Pearl Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">MINI WEDGE Dark Grey</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">MINI WEDGE White</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">SWAY WALL Black</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY WALL Pearl Grey</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">WEDGE Dark Grey</td><td class="va-confirm">1.60 VA</td></tr><tr class="row-alt"><td class="td-name">WEDGE Rosé Silver</td><td class="va-confirm">1.60 VA</td></tr><tr class=""><td class="td-name">WEDGE SLIM</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">WEDGE White</td><td class="va-confirm">1.60 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Spot</span><span class="cat-count">18 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">AIM</td><td class="va-confirm">2.10 VA</td></tr><tr class="row-alt"><td class="td-name">AIM DUO</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">AIM EXTRA LOW DUO</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">AIM EXTRA LOW TRIPLE</td><td class="va-confirm">6.30 VA</td></tr><tr class=""><td class="td-name">AIM Extra LOW</td><td class="va-confirm">2.10 VA</td></tr><tr class="row-alt"><td class="td-name">AIM LOW</td><td class="va-confirm">2.10 VA</td></tr><tr class=""><td class="td-name">AIM LOW DUO</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">AIM LOW TRIPLE</td><td class="va-confirm">6.30 VA</td></tr><tr class=""><td class="td-name">AIM TRIPLE</td><td class="va-confirm">6.30 VA</td></tr><tr class="row-alt"><td class="td-name">BIG SCOPE</td><td class="va-confirm">8.00 VA</td></tr><tr class=""><td class="td-name">BIG SCOPE NARROW</td><td class="va-confirm">7.90 VA</td></tr><tr class="row-alt"><td class="td-name">MICRO SCOPE</td><td class="va-confirm">1.10 VA</td></tr><tr class=""><td class="td-name">MINI SCOPE</td><td class="va-confirm">2.00 VA</td></tr><tr class="row-alt"><td class="td-name">MINI SCOPE DUO</td><td class="va-confirm">4.00 VA</td></tr><tr class=""><td class="td-name">MINI SCOPE PRO PACK</td><td class="va-confirm">2.00 VA</td></tr><tr class="row-alt"><td class="td-name">SCOPE</td><td class="va-confirm">5.20 VA</td></tr><tr class=""><td class="td-name">SMART SCOPE TONE</td><td class="va-confirm">9.50 VA</td></tr><tr class="row-alt"><td class="td-name">SUB</td><td class="va-confirm">4.70 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Ceiling Light</span><span class="cat-count">17 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">AIM CEILING</td><td class="va-confirm">2.10 VA</td></tr><tr class="row-alt"><td class="td-name">AIM CEILING DUO</td><td class="va-confirm">4.20 VA</td></tr><tr class=""><td class="td-name">AIM CEILING TRIPLE</td><td class="va-confirm">6.30 VA</td></tr><tr class="row-alt"><td class="td-name">DISC PENDANT 100-230V</td><td class="va-confirm">11.80 VA</td></tr><tr class=""><td class="td-name">DISC PENDANT 100-230V DUO</td><td class="va-confirm">23.60 VA</td></tr><tr class="row-alt"><td class="td-name">DISC PENDANT 100-230V TRIPLE</td><td class="va-confirm">35.40 VA</td></tr><tr class=""><td class="td-name">DISC PENDANT Black</td><td class="va-confirm">4.90 VA</td></tr><tr class="row-alt"><td class="td-name">MINI SCOPE CEILING</td><td class="va-confirm">2.00 VA</td></tr><tr class=""><td class="td-name">SCOPE CEILING</td><td class="va-confirm">4.80 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY PENDANT 100-230V Black</td><td class="va-confirm">7.10 VA</td></tr><tr class=""><td class="td-name">SWAY PENDANT 100-230V DUO Black</td><td class="va-confirm">14.20 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY PENDANT 100-230V DUO Pearl Grey</td><td class="va-confirm">14.20 VA</td></tr><tr class=""><td class="td-name">SWAY PENDANT 100-230V Pearl Grey</td><td class="va-confirm">7.10 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY PENDANT 100-230V TRIPLE Black</td><td class="va-confirm">21.30 VA</td></tr><tr class=""><td class="td-name">SWAY PENDANT 100-230V TRIPLE Pearl Grey</td><td class="va-confirm">21.30 VA</td></tr><tr class="row-alt"><td class="td-name">SWAY PENDANT Black</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">SWAY PENDANT Pearl Grey</td><td class="va-confirm">1.00 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Integrated</span><span class="cat-count">32 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">FLUX (without ring)</td><td class="va-confirm">2.50 VA</td></tr><tr class="row-alt"><td class="td-name">FLUX 22</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">FLUX 22 (without ring)</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">FLUX 22 Black</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">FLUX 22 Pearl Grey</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">FLUX 22 Stainless Steel</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">FLUX Black</td><td class="va-confirm">2.50 VA</td></tr><tr class="row-alt"><td class="td-name">FLUX Pearl Grey</td><td class="va-confirm">2.50 VA</td></tr><tr class=""><td class="td-name">FLUX Stainless Steel</td><td class="va-confirm">2.50 VA</td></tr><tr class="row-alt"><td class="td-name">FUSION (without ring)</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">FUSION 22 (without ring)</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">FUSION 22 Black</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">FUSION 22 Pearl Grey</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">FUSION 22 Stainless Steel</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">FUSION Black</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">FUSION Pearl Grey</td><td class="va-confirm">1.00 VA</td></tr><tr class=""><td class="td-name">FUSION Stainless Steel</td><td class="va-confirm">1.00 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE (without ring)</td><td class="va-confirm">0.80 VA</td></tr><tr class=""><td class="td-name">HYVE 22 (without ring)</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE 22 Black</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">HYVE 22 COOL Black</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE 22 COOL Pearl Grey</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">HYVE 22 COOL Stainless Steel</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE 22 Pearl Grey</td><td class="va-confirm">0.20 VA</td></tr><tr class=""><td class="td-name">HYVE 22 Stainless Steel</td><td class="va-confirm">0.20 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE Black</td><td class="va-confirm">0.80 VA</td></tr><tr class=""><td class="td-name">HYVE COOL (without ring)</td><td class="va-confirm">0.80 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE COOL Black</td><td class="va-confirm">0.80 VA</td></tr><tr class=""><td class="td-name">HYVE COOL Pearl Grey</td><td class="va-confirm">0.80 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE COOL Stainless Steel</td><td class="va-confirm">0.80 VA</td></tr><tr class=""><td class="td-name">HYVE Pearl Grey</td><td class="va-confirm">0.80 VA</td></tr><tr class="row-alt"><td class="td-name">HYVE Stainless Steel</td><td class="va-confirm">0.80 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Undercap Light</span><span class="cat-count">12 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">EVO FLEX 1</td><td class="va-confirm">9.90 VA</td></tr><tr class="row-alt"><td class="td-name">EVO FLEX 2</td><td class="va-confirm">15.70 VA</td></tr><tr class=""><td class="td-name">EVO FLEX 3</td><td class="va-confirm">20.20 VA</td></tr><tr class="row-alt"><td class="td-name">EVO HYDE 180C Black</td><td class="va-confirm">0.60 VA</td></tr><tr class=""><td class="td-name">EVO HYDE 180C Rosé Silver</td><td class="va-confirm">0.60 VA</td></tr><tr class="row-alt"><td class="td-name">EVO HYDE 550 Black</td><td class="va-confirm">2.10 VA</td></tr><tr class=""><td class="td-name">SMART EVO FLEX 1</td><td class="va-confirm">9.90 VA</td></tr><tr class="row-alt"><td class="td-name">SMART EVO FLEX 2</td><td class="va-confirm">15.70 VA</td></tr><tr class=""><td class="td-name">SMART EVO FLEX 3</td><td class="va-confirm">20.20 VA</td></tr><tr class="row-alt"><td class="td-name">SMART EVO FLEX TONE 1</td><td class="va-confirm">4.50 VA</td></tr><tr class=""><td class="td-name">SMART EVO FLEX TONE 2</td><td class="va-confirm">7.50 VA</td></tr><tr class="row-alt"><td class="td-name">SMART EVO FLEX TONE 5</td><td class="va-confirm">14.50 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Solitary</span><span class="cat-count">8 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">AIM FLOOR</td><td class="va-confirm">2.10 VA</td></tr><tr class="row-alt"><td class="td-name">AIM FLOOR 100-230V</td><td class="va-warn">Verify w/ rep</td></tr><tr class=""><td class="td-name">AIM FLOOR DUO</td><td class="va-confirm">4.20 VA</td></tr><tr class="row-alt"><td class="td-name">AIM FLOOR DUO 100-230V</td><td class="va-warn">Verify w/ rep</td></tr><tr class=""><td class="td-name">AIM FLOOR TRIPLE</td><td class="va-confirm">6.30 VA</td></tr><tr class="row-alt"><td class="td-name">AIM FLOOR TRIPLE 100-230V</td><td class="va-warn">Verify w/ rep</td></tr><tr class=""><td class="td-name">BREEZE</td><td class="va-confirm">1.70 VA</td></tr><tr class="row-alt"><td class="td-name">BREEZE LOW</td><td class="va-confirm">1.70 VA</td></tr></tbody>
+        </table>
+      </div>
+      <div class="cat-section">
+        <div class="cat-header"><span class="cat-name">Portable</span><span class="cat-count">1 fixtures</span></div>
+        <table class="fixture-table">
+          <thead><tr><th>Fixture</th><th>VA</th></tr></thead>
+          <tbody><tr class=""><td class="td-name">SWAY TABLE</td><td class="va-confirm">2.00 VA</td></tr></tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+function filterFixtures(){
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const countEl = document.getElementById('search-count');
+  const allRows = document.querySelectorAll('.fixture-table tbody tr');
+  const sections = document.querySelectorAll('.cat-section');
+
+  if(!q){
+    allRows.forEach(r=>r.style.display='');
+    sections.forEach(s=>s.style.display='');
+    countEl.textContent = '215 fixtures · all categories';
+    return;
+  }
+
+  let visible = 0;
+  sections.forEach(sec=>{
+    const rows = sec.querySelectorAll('tbody tr');
+    let secVisible = 0;
+    rows.forEach(r=>{
+      const name = r.querySelector('.td-name')?.textContent.toLowerCase()||'';
+      const show = name.includes(q);
+      r.style.display = show ? '' : 'none';
+      if(show) secVisible++;
+    });
+    sec.style.display = secVisible > 0 ? '' : 'none';
+    visible += secVisible;
+  });
+
+  countEl.textContent = visible + ' fixture' + (visible!==1?'s':'') + ' matching "' + q + '"';
+}
+</script>
+
+</body>
+</html>
